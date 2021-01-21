@@ -176,8 +176,18 @@ if __name__ == '__main__':
     from sklearn.linear_model import LinearRegression
     from sklearn.model_selection import train_test_split
 
-    # Load training data form scikit
+    # Load the iris dataset from scipy
+
     DX, Dy = load_iris(return_X_y=True)
+    print(DX.shape)
+
+    poly_terms = (
+        np.ones((DX.shape[0],)),
+        DX,
+        DX[:, 0]*DX[:, 0],
+        DX[:, 0]*DX[:, 0],
+        DX[:, 0]*DX[:, 0],
+    )
     DX = np.concatenate(
         (np.ones((DX.shape[0], 1)) , DX),
         axis=1
@@ -186,13 +196,10 @@ if __name__ == '__main__':
             DX, Dy, test_size=0.3
     )
 
-    # define and train classifier
     clf = MulticlassClassifier()
     clf.fit(train_X, train_y, iters=500)
     preds = clf.score(test_X, test_y)
     self_score = clf.score(train_X, train_y)
-
-    # Print the scores
     print("Score is :", preds)
     print("Score on training data:", self_score)
 
