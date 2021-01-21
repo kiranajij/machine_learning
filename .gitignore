@@ -1,0 +1,12 @@
+__pychache__
+*.pyc
+*.c
+*.8
+.vscode
+.sublime
+.vim
+*.swp
+
+*.out
+make_dataset.py
+*.ignore
